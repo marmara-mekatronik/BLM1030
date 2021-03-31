@@ -13,5 +13,5 @@ char  devam_mi;
         printf("Devam etmek istermisiniz (E/e veya H/h)?");
         scanf(" %c", &devam_mi );
         } while (devam_mi=='E'||devam_mi=='e');
-    printf("Canınız istemedi öyle mi?")
+    printf("Canınız istemedi öyle mi?");
     return 0;
