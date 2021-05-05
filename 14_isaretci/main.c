@@ -11,8 +11,11 @@ int main() {
 
     printf("İşaretcinin Değeri :  %p\n", tAdresDegisken);
 
-    printf("tAdresDegisken Adresi :  %p", &tAdresDegisken);
-    
+    printf("tAdresDegisken Adresi :  %p\n", &tAdresDegisken);
+
+    *tAdresDegisken = 55;
+
+    printf("Degiskenin Nihayii Degeri :  %d\n", tam);
 
     return 0;
 }
