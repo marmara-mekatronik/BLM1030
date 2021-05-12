@@ -9,7 +9,7 @@ int main() {
     printf("sütün sayisini giriniz : ");
     scanf("%d",&sutun);
 
-    int **matris = (int**) malloc(satir* sizeof(int));
+    int **matris = (int**) malloc(satir* sizeof(int*));
     for (int i = 0; i < satir; ++i) {
         matris[i] = (int*) malloc(sutun * sizeof(int));
     }
