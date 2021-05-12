@@ -10,7 +10,7 @@
 
 int main() {
     int sayi;
-    printf("Bir sayı girinizİ:");
+    printf("Bir sayı giriniz:");
     scanf("%d",&sayi);
 
     EGER((sayi KUCUK MIN) VEYA (sayi BUYUK MAX))
