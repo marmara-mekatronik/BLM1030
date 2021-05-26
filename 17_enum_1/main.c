@@ -25,6 +25,9 @@ int main() {
         case admin:
             printf("Yetki seviyeniz admindir\n");
             break;
+        default:
+            printf("Girdiğiniz değer geçersizdir");
+            break;
     }
     return 0;
 }
