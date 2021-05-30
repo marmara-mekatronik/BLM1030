@@ -1,1 +1,2 @@
-# BLM1030 Bilgisayar Programlama Dersi için Örnekler
+# BLM1030 Bilgisayar Programlama 
+## Dersi için Örnekler 
