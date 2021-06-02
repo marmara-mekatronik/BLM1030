@@ -75,6 +75,19 @@ int main() {
     printf("Yapının Bellek adresi: %p\n", filmPtr);
     printf("----------------------------------\n");
 
+        //kopyalama
+    struct sinemaFilmi film_2;
+    film_2=(*filmPtr);
+    printf("Film Adi : %s\n",film_2.ad );
+    printf("Film Yapım Yılı : %d\n", film_2.yapimYili);
+    printf("Film Türü : %d\n", film_2.Tur);
+    printf("Film IMDB puanı : %.2f\n", film_2.imdb);
+
+
+    printf("----------malloc copy veri-------------\n");
+    printf("Yapının Bellekte Kapladığı Alan: >%d< byte\n", sizeof(struct sinemaFilmi));
+    printf("Yapının Bellek adresi: %p\n", &film_2);
+    printf("----------------------------------\n");
     return 0;
 }
 
