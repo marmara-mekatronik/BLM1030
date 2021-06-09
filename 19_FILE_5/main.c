@@ -37,7 +37,11 @@ if(parametreDosyasi==NULL){
                               "Sıcaklık : %d , Kademe: %d , "
                               "Soguk/Sıcak: %c olarak SET edildi\n", kNo, Sicaklik, Kademe, SogukSicak);
         printf("Gerekli işlemler yapıldı.\n");
+        
     }
+    fclose(sonucDosyasi);
 }
+    fclose(parametreDosyasi);
+    
     return 0;
 }
