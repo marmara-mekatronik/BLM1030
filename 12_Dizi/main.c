@@ -1,28 +1,29 @@
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
 
-int main() {
+int main( )
+{
+    char K_dizi_1[50], K_dizi_2[50];
+    printf("Bir karekter dizisi giriniz: ");
+    gets(K_dizi_1);
+    printf("Bir karekter dizisi daha giriniz: ");
+    gets(K_dizi_2);
 
-    char Cdizi1[50], Cdizi2[20];
-    printf("Bir karakter dizisi giriniz: ");
-    gets(Cdizi1);
-    printf("Bir karakter dizisi daha giriniz: ");
-    gets(Cdizi2);
+//    printf(K_dizi_1);
+//    printf(K_dizi_2);
+    printf("%s %s", K_dizi_1, K_dizi_2);
 
-    printf("\n%s\n%s\n", Cdizi1, Cdizi2);
+    printf("Karakter dizilerinin Uzunlukları : %d - %d\n ",strlen(K_dizi_1), strlen(K_dizi_2));
 
-    printf("Karakter dizilerinin uzunluklari : %d  - %d \n", strlen(Cdizi1), strlen(Cdizi2));
-
-    if (!strcmp(Cdizi1, Cdizi2))
-        printf("Karekter dizilieri bir birine eşittir!");
+    if(!strcmp(K_dizi_1,K_dizi_2))
+        printf("Karekter dizileri bir birine eşittir!\n");
     else
-        printf("Karekter dizilieri bir birine eşit değildir!");
+        printf("Karekter dizileri bir birine eşit değildir!\n");
+    strcat(K_dizi_1, K_dizi_2);
+    printf("Dizi 1 değişkeni içeriği: %s\n", K_dizi_1);
 
-    strcat(Cdizi1, Cdizi2);
-    printf("\n%s\n", Cdizi1);
-
-    strcpy(Cdizi1, Cdizi2);
-    printf("%s\n", Cdizi1);
+    strcpy(K_dizi_1,K_dizi_2);
+    printf("Dizi 1 değişkeni içeriği: %s\n", K_dizi_1);
 
     return 0;
 }
