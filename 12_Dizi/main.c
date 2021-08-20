@@ -1,29 +1,37 @@
 #include <stdio.h>
 #include <string.h>
+#include<locale.h>
+
 
 int main( )
 {
-    char K_dizi_1[50], K_dizi_2[50];
+    setlocale(LC_ALL, "Turkish");
+    char K1[50], K2[50];
     printf("Bir karekter dizisi giriniz: ");
-    gets(K_dizi_1);
+    gets(K1);
     printf("Bir karekter dizisi daha giriniz: ");
-    gets(K_dizi_2);
+    gets(K2);
 
-//    printf(K_dizi_1);
-//    printf(K_dizi_2);
-    printf("%s %s", K_dizi_1, K_dizi_2);
+//    printf(K1);
+//    printf(K2);
+    printf("%s %s", K1, K2);
 
-    printf("Karakter dizilerinin Uzunlukları : %d - %d\n ",strlen(K_dizi_1), strlen(K_dizi_2));
+    printf("Karakter dizilerinin Uzunlukları : %d - %d\n ",strlen(K1), strlen(K2));
 
-    if(!strcmp(K_dizi_1,K_dizi_2))
+    if(!strcmp(K1,K2))
         printf("Karekter dizileri bir birine eşittir!\n");
     else
         printf("Karekter dizileri bir birine eşit değildir!\n");
-    strcat(K_dizi_1, K_dizi_2);
-    printf("Dizi 1 değişkeni içeriği: %s\n", K_dizi_1);
 
-    strcpy(K_dizi_1,K_dizi_2);
-    printf("Dizi 1 değişkeni içeriği: %s\n", K_dizi_1);
+    strncpy(K1,K2,4);
+    K1[4]='\0';
+    puts(K1);
+
+    strcat(K1, K2);
+    printf("Dizi 1 değişkeni içeriği: %s\n", K1);
+
+    strcpy(K1,K2);
+    printf("Dizi 1 değişkeni içeriği: %s\n", K1);
 
     return 0;
 }
