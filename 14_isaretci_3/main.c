@@ -1,24 +1,28 @@
 #include <stdio.h>
 
 int main() {
-    int dizi[5]={10,20,30,40,50};
-    int i;
-    int *p;
-    for (i;i<5;i++){
-        printf("%d :",dizi[i]);
-        printf("%p\n",&dizi[i]);
+int dizi[5]={10,20,30,40,50};
+int *pDizi;
+int z;
+    for (int i = 0; i < 5; ++i) {
+        printf("deger: %d -> adresi : %p\n", dizi[i], &dizi[i]);
     }
     printf("-------------------\n");
-    printf("%p\n",dizi); // aşağıdaki satırla aynı ifade
-    printf("%p\n",&dizi[0]);
+    printf("dizi degiskeninin adi isaretcidir: %p\n",dizi); // printf("%p\n",&dizi[0]);
     printf("-------------------\n");
-    p=dizi; // p=&dizi[0]; bu ifadeler aynı
-    printf("p degiskenine atanmis adres : %p\n",p);
-    printf("p degiskeninin gosterdigi adresdeki deger : %d\n",*p);
-    i=4;
-    printf("p degiskeninin i blok otesindeki adresdeki deger: %d\n",*(p+i));
+
+    pDizi=dizi; // pDizi=&dizi[0]; bu ifadeler aynıdır.
+    printf("pDizi degiskenine atanmis adres : %p\n",pDizi);
+    printf("pDizi degiskeninin gosterdigi adresdeki deger : %d\n", *pDizi);
+
+    z=2;
+    printf("pDizi degiskeninin z blok otesindeki adresdeki deger: %d\n", *(pDizi+z));
+    // *(pDizi+z) => *(pDizi+Sizeof(int)*z
     printf("-------------------\n");
-    printf("p degiskeninin i blok otesindeki adresdeki deger: %d\n",*p+i);
-    // dizi[0]=dizi[0]+1;
+    printf("pDizi degiskeninin referans gosterdigi \n"
+           "yerdeki degere z degerinin eklenmis hali: %d\n", *pDizi+z);
+    // dizi[i]=dizi[i]+z
+    printf("-------------------\n");
+
     return 0;
 }
