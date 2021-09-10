@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void diziYazdır(int *, int);
+void diziYazdir(int *, int);
 
 int main() {
 
@@ -46,7 +46,7 @@ int main() {
     return 0;
 
 }
-void diziYazdır(int *dizi, int elemanSayisi){
+void diziYazdir(int *dizi, int elemanSayisi){
     for (int i = 0; i < elemanSayisi; ++i) {
         printf("dizi[%d]=%d\n",i,dizi[i]);
 
