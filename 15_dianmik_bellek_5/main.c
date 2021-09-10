@@ -1,42 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+void matrisAl(int **);
+
 void matrisYazdir(int **, int, int);
 
+int satirSayisi;
+int sutunSayisi;
+
 int main() {
-    int satir, sutun;
-    printf("satir sayisini giriniz : ");
-    scanf("%d", &satir);
-    printf("sutun sayisini giriniz : ");
-    scanf("%d", &sutun);
+// int matris[satir][sutun];
 
-    int **matris = (int **) malloc(satir * sizeof(int *));
+    printf("Satir sayisini giriniz :");
+    scanf("%d", &satirSayisi);
 
-    for (int m = 0; m < satir; ++m) {
-        matris[m] = (int *) malloc(satir * sizeof(int));
+    printf("Sutun sayisini giriniz :");
+    scanf("%d", &sutunSayisi);
+
+    int **matris = (int **) malloc(satirSayisi * sizeof(int));
+
+    for (int m = 0; m < satirSayisi; ++m) {
+        matris[m] = (int **) malloc(sutunSayisi * sizeof(int));
+
     }
+
+    matrisAl(matris);
+    matrisYazdir(matris, satirSayisi, sutunSayisi);
+
+    return 0;
+}
+
+void matrisAl(int **matris) {
+
     if (matris == NULL) {
         printf("%s:%d> Dizi için gerekli bellek ayrılmadı\n ", __FILE__, __LINE__);
-        exit(0);
+        exit(1);
     } else {
-        for (int i = 0; i < satir; ++i) {
-            for (int j = 0; j < sutun; j++) {
+        for (int i = 0; i < satirSayisi; ++i) {
+            for (int j = 0; j < sutunSayisi; ++j) {
                 printf("matris[%d][%d]=", i, j);
                 scanf("%d", &(matris[i][j]));
             }
-        }
-        matrisYazdir(matris, satir, sutun);
 
-        return 0;
+        }
     }
+
 }
 
-    void matrisYazdir(int **matris, int satir, int sutun) {
-        int a, b;
-        for (a = 0; a < satir; ++a) {
-            for (b = 0; b < sutun; b++) {
-                printf("%d", matris[a][b]);
+void matrisYazdir(int **matris, int satirS, int sutunS) {
+    for (int i = 0; i < satirS; ++i) {
+        for (int j = 0; j < sutunS; ++j) {
+            printf("%d\t", matris[i][j]);
 
-            }
-            printf("\n");
         }
+        printf("\n");
+
     }
+}
