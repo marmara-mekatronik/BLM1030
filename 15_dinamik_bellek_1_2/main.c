@@ -16,6 +16,8 @@ int main() {
     for (int i = 0; i < sayi; ++i) {
         printf("%d. elemani : %2d\n", i+1, SayiDizisi[i]);
     }
+    
+    free(SayiDizisi);
 
     return 0;
 }
