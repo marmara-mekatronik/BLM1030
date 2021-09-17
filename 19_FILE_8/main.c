@@ -21,16 +21,18 @@ void ogrenciDosyaYaz(struct ogrenci Ogr, const char *dosyaAdi);
 void ogrenciDosyaOku(struct ogrenci Ogr, const char *dosyaAdi);
 
 void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi);
-//struct ogrenci ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi);
+
+void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi);
 
 
 int main() {
     const char dosyaAdi[] = "ogrenci.txt";
     struct ogrenci Ogrenci_1;
 
-    // ogrenciDosyaYaz(Ogrenci_1, dosyaAdi);
+    ogrenciDosyaYaz(Ogrenci_1, dosyaAdi);
     ogrenciDosyaOku(Ogrenci_1, dosyaAdi);
     ogrenciEnYuksekNot(Ogrenci_1, dosyaAdi);
+    ogrenciEnDusukNot(Ogrenci_1, dosyaAdi);
 
     return 0;
 }
@@ -83,30 +85,59 @@ void ogrenciDosyaYaz(struct ogrenci Ogr, const char *dosyaAdi) {
 }
 
 void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi) {
-    int eb1 = -1, eb2 = -1, eb3 = -1, eb4 = -1;
+    int ek1 = -1, ek2 = -1, ek3 = -1, ek4 = -1;
     FILE *DosyaG = fopen(dosyaAdi, "r");
     if (DosyaG == NULL) {
         puts("ogrenci.txt dosyasi acilamadi. !\n");
         exit(1);
     } else {
-        puts("Öğrenciye ait bilgiler:\n");
+        puts("Şubelere ait en büyük not bilgileri:\n");
         while (!feof(DosyaG)) {
             fscanf(DosyaG, "%d %d %d %s %d",
                    &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot);
 
             if (Ogr.OgrSube == 1) {
-                if (Ogr.OgrNot > eb1) eb1 = Ogr.OgrNot;
+                if (Ogr.OgrNot > ek1) ek1 = Ogr.OgrNot;
             } else if (Ogr.OgrSube == 2) {
-                if (Ogr.OgrNot > eb2) eb2 = Ogr.OgrNot;
+                if (Ogr.OgrNot > ek2) ek2 = Ogr.OgrNot;
             } else if (Ogr.OgrSube == 3) {
-                if (Ogr.OgrNot > eb3) eb3 = Ogr.OgrNot;
+                if (Ogr.OgrNot > ek3) ek3 = Ogr.OgrNot;
             } else if (Ogr.OgrSube == 4) {
-                if (Ogr.OgrNot > eb4) eb4 = Ogr.OgrNot;
+                if (Ogr.OgrNot > ek4) ek4 = Ogr.OgrNot;
             }
         }
-        printf("Sube 1 En büyük Puan : %d\n", eb1);
-        printf("Sube 2 En büyük Puan : %d\n", eb2);
-        printf("Sube 3 En büyük Puan : %d\n", eb3);
-        printf("Sube 4 En büyük Puan : %d\n", eb4);
+        printf("Sube 1 En büyük Puan : %d\n", ek1);
+        printf("Sube 2 En büyük Puan : %d\n", ek2);
+        printf("Sube 3 En büyük Puan : %d\n", ek3);
+        printf("Sube 4 En büyük Puan : %d\n", ek4);
+    }
+}
+
+void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi) {
+    int ek1 = 101, ek2 = 101, ek3 = 101, ek4 = 101;
+    FILE *DosyaG = fopen(dosyaAdi, "r");
+    if (DosyaG == NULL) {
+        puts("ogrenci.txt dosyasi acilamadi. !\n");
+        exit(1);
+    } else {
+        puts("Şubelere ait en küçük not bilgileri:\n");
+        while (!feof(DosyaG)) {
+            fscanf(DosyaG, "%d %d %d %s %d",
+                   &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot);
+
+            if (Ogr.OgrSube == 1) {
+                if (Ogr.OgrNot < ek1) ek1 = Ogr.OgrNot;
+            } else if (Ogr.OgrSube == 2) {
+                if (Ogr.OgrNot < ek2) ek2 = Ogr.OgrNot;
+            } else if (Ogr.OgrSube == 3) {
+                if (Ogr.OgrNot < ek3) ek3 = Ogr.OgrNot;
+            } else if (Ogr.OgrSube == 4) {
+                if (Ogr.OgrNot < ek4) ek4 = Ogr.OgrNot;
+            }
+        }
+        printf("Sube 1 En küçük Puan : %d\n", ek1);
+        printf("Sube 2 En küçük Puan : %d\n", ek2);
+        printf("Sube 3 En küçük Puan : %d\n", ek3);
+        printf("Sube 4 En küçük Puan : %d\n", ek4);
     }
 }
