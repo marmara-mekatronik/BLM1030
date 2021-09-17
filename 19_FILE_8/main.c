@@ -111,6 +111,7 @@ void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi) {
         printf("Sube 3 En büyük Puan : %d\n", eb3);
         printf("Sube 4 En büyük Puan : %d\n", eb4);
     }
+    fclose(DosyaG);
 }
 
 void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi) {
@@ -140,4 +141,5 @@ void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi) {
         printf("Sube 3 En küçük Puan : %d\n", ek3);
         printf("Sube 4 En küçük Puan : %d\n", ek4);
     }
+    fclose(DosyaG);
 }
