@@ -85,7 +85,7 @@ void ogrenciDosyaYaz(struct ogrenci Ogr, const char *dosyaAdi) {
 }
 
 void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi) {
-    int ek1 = -1, ek2 = -1, ek3 = -1, ek4 = -1;
+    int eb1 = -1, eb2 = -1, eb3 = -1, eb4 = -1;
     FILE *DosyaG = fopen(dosyaAdi, "r");
     if (DosyaG == NULL) {
         puts("ogrenci.txt dosyasi acilamadi. !\n");
@@ -97,19 +97,19 @@ void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi) {
                    &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot);
 
             if (Ogr.OgrSube == 1) {
-                if (Ogr.OgrNot > ek1) ek1 = Ogr.OgrNot;
+                if (Ogr.OgrNot > eb1) eb1 = Ogr.OgrNot;
             } else if (Ogr.OgrSube == 2) {
-                if (Ogr.OgrNot > ek2) ek2 = Ogr.OgrNot;
+                if (Ogr.OgrNot > eb2) eb2 = Ogr.OgrNot;
             } else if (Ogr.OgrSube == 3) {
-                if (Ogr.OgrNot > ek3) ek3 = Ogr.OgrNot;
+                if (Ogr.OgrNot > eb3) eb3 = Ogr.OgrNot;
             } else if (Ogr.OgrSube == 4) {
-                if (Ogr.OgrNot > ek4) ek4 = Ogr.OgrNot;
+                if (Ogr.OgrNot > eb4) eb4 = Ogr.OgrNot;
             }
         }
-        printf("Sube 1 En büyük Puan : %d\n", ek1);
-        printf("Sube 2 En büyük Puan : %d\n", ek2);
-        printf("Sube 3 En büyük Puan : %d\n", ek3);
-        printf("Sube 4 En büyük Puan : %d\n", ek4);
+        printf("Sube 1 En büyük Puan : %d\n", eb1);
+        printf("Sube 2 En büyük Puan : %d\n", eb2);
+        printf("Sube 3 En büyük Puan : %d\n", eb3);
+        printf("Sube 4 En büyük Puan : %d\n", eb4);
     }
 }
 
