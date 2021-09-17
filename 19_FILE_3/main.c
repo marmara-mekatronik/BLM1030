@@ -1,32 +1,33 @@
 #include <stdio.h>
 
-int main() {
-   FILE* dosya =NULL;
-   dosya = fopen("bilgi.txt","r");
-   if(dosya!=NULL){
-       printf("Dosya Okunuyor...\n");
-       printf("_________________________\n");
-       printf("_______DOSYA_ICERIGI_____\n");
-       printf("_________________________\n");
+int main(int argc, char *argv[]) {
 
-       int ch = fgetc(dosya);
-       while(ch!=EOF){
-           putchar(ch);
-           ch = fgetc(dosya);
+    if (argc == 2) {
+        FILE *Dosya = fopen(argv[1], "r");
+        if (Dosya == NULL) {
+            printf("Hata...\n Açılamayan Dosya : %s\n", argv[1]);
+            printf("Dosya adı yanlış veya dosya yok...");
+        } else {
+            printf("Dosya Okunuyor...\n");
+            printf("_________________________\n");
+            printf("_______DOSYA_ICERIGI_____\n");
+            printf("_________________________\n");
 
-       }
-       printf("\n");
-       printf("_________________________\n");
+            int ch = fgetc(Dosya);
 
-   } else {
-       printf("Dosya açılamadı...\n");
-   }
+            while (ch != EOF) {
+                putchar(ch);
+                ch = fgetc(Dosya);
+            }
 
+            printf("\n");
+            printf("________Dosya_Sonu______________\n");
+        }
+    } else if (argc == 1) {
+        printf("Eksik parametre....");
+    } else {
+        printf("Çok fazla parametre....");
+    }
 
     return 0;
 }
-
-//bilgi.txt dosya içeriği
-//Aşı, hastalıklara karşı bağışıklık sağlama amacı ile insan veya hayvan vücuduna verilen,
-//zayıflatılmış hastalık virüsü, hastalık etkeninin parçaları veya salgıları ile
-//oluşturulan çözeltidir.
