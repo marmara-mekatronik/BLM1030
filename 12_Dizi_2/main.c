@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
+
 
 int main() {
     char c_dizi1[9] = {'K', 'a', 'r', 'a', 'k', 't', 'e', 'r', '\0'};
@@ -11,41 +12,43 @@ int main() {
     int i_dizi2[2][3][4];
     int i_dizi3[] = {1, 2, 3, 4, 5, 6};
 
-    int i1, i2, i3;
+    for (int i = 0; i < 10; ++i) {
+        i_dizi1[i] = i * i;
+        printf("%d \t", i_dizi1[i]);
 
-
-    for (i1 = 0; i1 < 10; ++i1) {
-        i_dizi1[i1] = i1 * i1;
-        printf("%d\n", i_dizi1[i1]);
     }
 
-    printf("\n%s - %s", c_dizi1, c_dizi2);
+    printf("\n%s - %s ", c_dizi1, c_dizi2);
 
-    for (i1 = 0; i1 < 2; ++i1) {
-        for (i2 = 0; i2 < 3; ++i2) {
-            for (i3 = 0; i3 < 4; ++i3) {
-                i_dizi2[i1][i2][i3] = (i1 + 2) * (i2 + 2) * (i3 + 2);
-                printf("%d\n", i_dizi2[i1][i2][i3]);
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            for (int k = 0; k < 4; ++k) {
+                i_dizi2[i][j][k] = (i + 2) * (j + 2) * (k + 2);
+                printf("%d \t", i_dizi2[i][j][k]);
             }
+            printf("\n");
         }
-
+        printf("\n");
     }
 
-    strcpy(c_dizi3[0], "Karekter dizileri");
-//   strcpy(c_dizi3[1],"Katar dizileri");
+    strcpy(c_dizi3[0], "Karekter Dizisi 1");
+    strcpy(c_dizi3[1], "Karekter Dizisi 2");
 
-    for (i1 = 0; i1 < 19; i1++) {
-        c_dizi3[1][i1] = 'A';
+    printf("%s\n", c_dizi3[0]);
+    printf("%s\n", c_dizi3[1]);
+
+    for (int i = 0; i < sizeof(c_dizi4) / sizeof(char); ++i) {
+        printf("%c", c_dizi4[i]);
     }
-    c_dizi3[1][i1] = '\0';
+    printf("\n");
+    puts(c_dizi4);
 
-    printf("\n%s\n%s\n", c_dizi3[0], c_dizi3[1]);
 
-    for (i1 = 0; i1 < 5; ++i1) {
-        printf("%d\n", i_dizi3[i1]);
+    for (int i = 0; i < sizeof(i_dizi3) / sizeof(int); ++i) {
+        printf("%d\t", i_dizi3[i]);
     }
-
-    printf("%s", c_dizi4);
 
     return 0;
 }
+
+
