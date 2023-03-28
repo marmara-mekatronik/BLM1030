@@ -1,37 +1,35 @@
-#include <stdio.h>
-#include <string.h>
-#include<locale.h>
-
-
-int main( )
-{
-    setlocale(LC_ALL, "Turkish");
+    setlocale(LC_ALL, "tr_TR.UTF-8");
     char K1[50], K2[50];
-    printf("Bir karekter dizisi giriniz: ");
-    gets(K1);
-    printf("Bir karekter dizisi daha giriniz: ");
-    gets(K2);
 
-//    printf(K1);
-//    printf(K2);
-    printf("%s %s", K1, K2);
+    printf("Bir karakter dizisi giriniz :");
+    fgets(K1, sizeof(K1), stdin);
 
-    printf("Karakter dizilerinin Uzunlukları : %d - %d\n ",strlen(K1), strlen(K2));
+    printf("Bir karakter dizisi daha giriniz :");
+    fgets(K2, sizeof(K2), stdin);
 
-    if(!strcmp(K1,K2))
-        printf("Karekter dizileri bir birine eşittir!\n");
+    printf("Birinci Karakter Dizesi:%s", K1);
+    printf("İkinci Karakter Dizesi:%s", K2);
+
+    printf("Birinci Karakter Boyutu: %d\n", strlen(K1) - 1);
+    printf("Birinci Karakter Boyutu: %d\n", strlen(K2) - 1);
+
+    if (!strcmp(K1, K2))
+        printf("Karakter dizileri bir birine eşittir\n");
     else
-        printf("Karekter dizileri bir birine eşit değildir!\n");
+        printf("Karakter dizileri bir birine eşit değildir\n");
 
-    strncpy(K1,K2,4);
-    K1[4]='\0';
-    puts(K1);
+    strncpy(K1, K2, 4);
+    printf("Birinci Karakter Dizesi: %s\n", K1);
+    printf("İkinci Karakter Dizesi: %s\n", K2);
 
     strcat(K1, K2);
-    printf("Dizi 1 değişkeni içeriği: %s\n", K1);
+    printf("Birinci Karakter Dizesi: %s\n", K1);
+    printf("Birinci Karakter Dizesi: %s\n", K2);
 
-    strcpy(K1,K2);
-    printf("Dizi 1 değişkeni içeriği: %s\n", K1);
+    strcpy(K1, K2);
+    printf("İkinci Karakter Dizesi: %s\n", K1);
+    printf("İkinci Karakter Dizesi: %s\n", K2);
 
-    return 0;
-}
+    K1[4] = '\0';
+
+    printf("Birinci Karakter Dizesi: %s\n", K1);
