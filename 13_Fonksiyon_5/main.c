@@ -1,28 +1,23 @@
 #include <stdio.h>
 
-void tahta_ciz(int satir,int sutun);
+void tahta_ciz(int satir, int sutun);
+
 int main() {
-    tahta_ciz(8,8);
+    tahta_ciz(8, 8);
     return 0;
 }
 
-void tahta_ciz(int satir,int sutun){
-    int k=1;
-    for (int i = satir; i > 0 ; --i) {
-        for (int j = sutun; j > 0 ; --j) {
-            if(k==1){
-                printf(" [ ] ");
+void tahta_ciz(int satir, int sutun) {
+    for (int i = 0; i < satir; ++i) {
+        for (int j = 0; j < sutun; ++j) {
+            if ((i+ j) % 2 == 0) {
+                printf("[X]");
+            } else {
+                printf("[ ]");
             }
-                else{
-                printf(" [X] ");
-            }
-                k*=-1;
         }
-
-        if(sutun%2==0){
-            k*=-1;
-        }
-        printf(" \n ");
+        printf("\n");
     }
-
 }
+
+
