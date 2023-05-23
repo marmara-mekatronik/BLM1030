@@ -1,52 +1,53 @@
 #include <stdio.h>
 #include <string.h>
-enum filmTur {
-    dram = 1,
-    komedi,
-    gerilim,
-    korku
-};
-struct sinemaFilmi {
-    char ad[100];
+
+typedef enum filmTur {
+    dram = 1, korku, gerilim
+} Tur;
+typedef struct sinemaFilmi {
+    char filmAd[100];
     int yapimYili;
-    float imdb;
-    enum filmTur Tur;
-};
-void FilmYaz(struct sinemaFilmi);
+    float imdbPuan;
+    Tur filmTuru;
+} Film;
+
+void filmTurYaz(Tur filmTuru);
+
+void filmYazdir(Film filmler[], int diziBoyutu);
 
 int main() {
-    struct sinemaFilmi film_1;
-
-    strcpy(film_1.ad, "Titanic");
-    film_1.yapimYili = 1997;
-    film_1.imdb = 7.8;
-    film_1.Tur = dram;
-
-    FilmYaz(film_1);
+    Film film[3] = {{"Titanic", 1997, 7.9, dram},
+                    {"Saw",     2004, 7.6, korku},
+                    {"Rebecca", 1940, 8.1, gerilim}};
+    filmYazdir(film, sizeof(film) / sizeof(Film));
 
     return 0;
 }
 
-void FilmYaz(struct sinemaFilmi film_1){
-
-    printf("Film Adi : %s\n", film_1.ad);
-    printf("Film Yapım Yılı : %d\n", film_1.yapimYili);
-    switch (film_1.Tur) {
+void filmTurYaz(Tur filmTuru) {
+    switch (filmTuru) {
         case dram:
-            printf("Film Türü : Dram\n");
-            break;
-        case komedi:
-            printf("Film Türü : Komedi\n");
-            break;
-        case gerilim:
-            printf("Film Türü : Gerilim\n");
+            printf("DRAM");
             break;
         case korku:
-            printf("Film Türü : Korku\n");
+            printf("KORKU");
+            break;
+        case gerilim:
+            printf("GERILIM");
             break;
         default:
-            printf("Film Türü : Tanımsız\n");
+            printf("HATA!");
             break;
     }
-    printf("Film IMDB puanı : %.2f\n", film_1.imdb);
+}
+
+void filmYazdir(Film filmler[], int diziBoyutu) {
+    for (int i = 0; i < diziBoyutu; i++) {
+        printf("Film Adi : %s\n", filmler[i].filmAd);
+        printf("Film Yapim Yili : %d\n", filmler[i].yapimYili);
+        printf("Film IMDB Puani : %.2f\n", filmler[i].imdbPuan);
+        printf("Film Turu : ");
+        filmTurYaz(filmler[i].filmTuru);
+        printf("\n--------------\n");
+    }
 }
