@@ -1,57 +1,55 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+typedef enum {
+    dram = 1,
+    komedi,
+    gerilim,
+    korku
+} FilmTur;
+typedef struct {
+    char ad[100];
+    int yapimYili;
+    float imdb;
+    FilmTur tur;
+} SinemaFilmi;
 
 int main() {
-    enum filmTur {
-        dram = 1,
-        komedi,
-        gerilim,
-        korku
+    SinemaFilmi Film[] = {
+            {"Titanic", 1997, 7.8, dram},
+            {"Togo", 2019, 8.2, dram},
+            {"Green Book", 2018, 8.3, komedi},
+            {"Alien", 1979, 8.1, korku}
     };
-
-    struct sinemaFilmi {
-        char ad[100];
-        int yapimYili;
-        float imdb;
-        enum filmTur Tur;
-    };
-    // struct sinemaFilmi filmx[5] = {{"Titanic", 1997, 7.8, dram}, {"Togo", 2019, 8.2, dram}};
-    struct sinemaFilmi film1 = {"Titanic", 1997, 7.8, dram};
-    struct sinemaFilmi film2 = {"Togo", 2019, 8.2, dram};
-    struct sinemaFilmi film3 = {"Green Book", 2018, 8.3, komedi};
-    struct sinemaFilmi film4 = {"Alien", 1979, 8.1, korku};
     char *dosyaAdi = "film.db";
-    FILE *dosya = NULL;
-    dosya = fopen(dosyaAdi, "wb+");
-    if (dosya == NULL) {
-        printf("%s dosyasi oluşturulamadı/açılamadı\n", dosyaAdi);
-        return 0;
-    } else {
-        fwrite(&film1, sizeof(film1), 1, dosya);
-        fwrite(&film2, sizeof(film2), 1, dosya);
-        fwrite(&film3, sizeof(film3), 1, dosya);
-        fwrite(&film4, sizeof(film4), 1, dosya);
-        fclose(dosya);
+    FILE *Dosya = fopen(dosyaAdi, "wb+");
+    if (Dosya == NULL) {
+        printf("%s dosyasi olusturulamadi/acilamadi\n", dosyaAdi);
+        exit(1);
     }
+    for (int i = 0; i < sizeof(Film)/ sizeof(SinemaFilmi); ++i) {
+        fwrite(&Film[i], sizeof(Film[i]), 1, Dosya);
+    }
+    fclose(Dosya);
 
-    struct sinemaFilmi filmoku;
+    SinemaFilmi okunanFilm;
 
-    dosya = fopen(dosyaAdi, "rb+");
-    if(dosya==NULL){
-        printf("%s dosyasi oluşturulamadı/açılamadı\n", dosyaAdi);
-        return 0;
-    }else{
-        rewind(dosya);
-        printf("->film.db Dosyasından okunan film bilgileri<-\n");
+    Dosya = fopen(dosyaAdi, "rb+");
+    if (Dosya == NULL) {
+        printf("%s dosyasi okunamadi !\n", dosyaAdi);
+        exit(1);
+    }
+    printf("->film.db Dosyasindan okunan film bilgileri<-\n");
+    printf("____________________________________\n");
+    for (int i = 0; i <  sizeof(Film)/ sizeof(SinemaFilmi); ++i) {
+        fread(&okunanFilm, sizeof(Film[i]),1,Dosya);
+        printf("Film Adi: %s \n",okunanFilm.ad);
+        printf("Film Yapim Yili:%d\n",okunanFilm.yapimYili);
+        printf("Film IMDB Puani:%.2f\n",okunanFilm.imdb);
+        printf("Film Turu:%d\n",okunanFilm.tur);
+        printf("Dosya Konum Bilgisi: %ld . byte \n", ftell(Dosya));
         printf("____________________________________\n");
-        for (int i = 0; i < 4; ++i) {
-            fread(&filmoku, sizeof(film1), 1, dosya);
-            puts(filmoku.ad);
-            printf("%d\n",filmoku.yapimYili);
-            printf("%.2f\n",filmoku.imdb);
-            printf("Dosya Konum Bilgisi: %ld . byte \n", ftell(dosya));
-            printf("____________________________________\n");
-        }
-        fclose(dosya);
     }
+    fclose(Dosya);
     return 0;
 }
