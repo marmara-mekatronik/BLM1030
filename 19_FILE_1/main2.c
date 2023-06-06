@@ -7,8 +7,8 @@ typedef enum {
 } Cinsiyet;
 typedef struct {
     int ogrNo;
-    char ad[10];
-    float not;
+    char ogrAd[10];
+    float ogrNot;
     Cinsiyet cinsiyet;
 } Ogrenci;
 
@@ -26,15 +26,15 @@ int main() {
         printf("%d. Ogrenci Numarasi:", i);
         scanf("%d", &ogrenci.ogrNo);
         printf("%d. Ogrenci Adi:", i);
-        scanf("%9s", ogrenci.ad);
+        scanf("%9s", ogrenci.ogrAd);
         printf("%d. Ogrenci Notu:", i);
-        scanf("%f", &ogrenci.not);
+        scanf("%f", &ogrenci.ogrNot);
         printf("%d. Ogrenci Cinsiyeti(Erkek=0, Kadin=1):",i);
         int cinsiyet;
         scanf("%d",&cinsiyet);
         ogrenci.cinsiyet = (Cinsiyet)cinsiyet;
         fprintf(Dosya, "%5d %10s %.2f %d\n", ogrenci.ogrNo,
-                ogrenci.ad, ogrenci.not, ogrenci.cinsiyet);
+                ogrenci.ogrAd, ogrenci.ogrNot, ogrenci.cinsiyet);
         printf("Devam etmek istermisiniz (E/e veya H/h)?");
         getchar();
         scanf(" %c", &karar);
