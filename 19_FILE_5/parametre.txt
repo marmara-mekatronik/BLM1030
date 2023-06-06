@@ -1,1 +1,8 @@
-1 0 24 3 C
+1234 1 25 2 S
+
+
+1234: Klima numarası.
+1: Aktif/Pasif durumu. 0 ise klima kapalı, 1 ise klima açık.
+25: Sıcaklık değeri.
+2: Kademe değeri.
+S: Soğuk/Sıcak modu. Bu örnekte "S" harfi soğuk modu temsil ediyor.
