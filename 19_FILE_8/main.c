@@ -7,14 +7,13 @@ enum Cinsiyet {
 enum Sube {
     a1 = 1, b1, c1, d1
 };
-
 struct ogrenci {
-    int OgrNo, OgrNot;
+    int OgrNo;
+    float OgrNot;
     char OgrAd[10];
     enum Cinsiyet OgrCinsiyet;
     enum Sube OgrSube;
 };
-
 
 void ogrenciDosyaYaz(struct ogrenci Ogr, const char *dosyaAdi);
 
@@ -23,7 +22,6 @@ void ogrenciDosyaOku(struct ogrenci Ogr, const char *dosyaAdi);
 void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi);
 
 void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi);
-
 
 int main() {
     const char dosyaAdi[] = "ogrenci.txt";
@@ -43,14 +41,14 @@ void ogrenciDosyaOku(struct ogrenci Ogr, const char *dosyaAdi) {
         puts("ogrenci.txt dosyasi acilamadi. !\n");
         exit(1);
     } else {
-        puts("Öğrenciye ait bilgiler:\n");
-        while (!feof(DosyaG)) {
-            fscanf(DosyaG, "%d %d %d %s %d",
-                   &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot);
-            printf("Sube: %d\t Cinsiyet: %d\t No: %d\t Ad: %s\t Not:%d\n",
-                   Ogr.OgrSube, Ogr.OgrCinsiyet, Ogr.OgrNo, Ogr.OgrAd, Ogr.OgrNot);
+        puts("Ogrenciye ait bilgiler:\n");
+        while (fscanf(DosyaG, "%d %d %d %s %f",
+                     &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot) == 5) {
+            printf("Sube: %d\t Cinsiyet: %s\t No: %d\t Ad: %s\t Not:%.2f\n",
+                   Ogr.OgrSube, Ogr.OgrCinsiyet == Erkek ? "Erkek" : "Kadin", Ogr.OgrNo, Ogr.OgrAd, Ogr.OgrNot);
         }
     }
+    fclose(DosyaG);
 }
 
 
@@ -61,39 +59,41 @@ void ogrenciDosyaYaz(struct ogrenci Ogr, const char *dosyaAdi) {
     if (DosyaG == NULL)
         puts("ogrenci.txt dosyasi acilamadi. !\n");
     else
-        puts("Öğrenciye ait bilgileri giriniz:\n");
+        puts("Ogrenciye ait bilgileri giriniz:\n");
 
     do {
-        printf("%d. ogrencinin Subesini girininiz(a1=1,b1=2,c1=3,d1=4): ", i);
+        printf("%d. Ogrencinin subesini girininiz(a1=1,b1=2,c1=3,d1=4): ", i);
         scanf("%d", &Ogr.OgrSube);
-        printf("%d. ogrencinin Cinsiyetini girininiz(Kadin = 1, Erkek=2): ", i);
+        printf("%d. Ogrencinin cinsiyetini girininiz(Kadin = 1, Erkek=2): ", i);
         scanf("%d", &Ogr.OgrCinsiyet);
-        printf("%d. ogrencinin numarasini girininiz: ", i);
+        printf("%d. Ogrencinin numarasini girininiz: ", i);
         scanf("%d", &Ogr.OgrNo);
-        printf("%d. ogrencinin adini girininiz: ", i);
+        printf("%d. Ogrencinin adini girininiz: ", i);
         scanf(" %s", Ogr.OgrAd);
-        printf("%d. ogrencinin notunu girininiz: ", i);
-        scanf("%d", &Ogr.OgrNot);
-        fprintf(DosyaG, "%d %d %d %s %d\n",
-                Ogr.OgrSube, Ogr.OgrCinsiyet, Ogr.OgrNo, Ogr.OgrAd, Ogr.OgrNot);
-        printf("Devam etmek istiyormusunuz (E/e veya H/h) ? :");
+        printf("%d. Ogrencinin notunu girininiz: ", i);
+        scanf("%f", &Ogr.OgrNot);
+        getchar();
+        printf("Devam etmek istiyor musunuz (E/e veya H/h) ? :");
         scanf(" %c", &devam_mi);
+        fprintf(DosyaG, "%d %d %d %s %f\n",
+                Ogr.OgrSube, Ogr.OgrCinsiyet, Ogr.OgrNo, Ogr.OgrAd, Ogr.OgrNot);
+
         i++;
     } while (devam_mi == 'E' || devam_mi == 'e');
     fclose(DosyaG);
-    puts("Veriler Dosyaya yazildi...");
+    puts("Veriler Dosyaya yazildi...\n");
 }
 
 void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi) {
-    int eb1 = -1, eb2 = -1, eb3 = -1, eb4 = -1;
+    float eb1 = -1, eb2 = -1, eb3 = -1, eb4 = -1;
     FILE *DosyaG = fopen(dosyaAdi, "r");
     if (DosyaG == NULL) {
         puts("ogrenci.txt dosyasi acilamadi. !\n");
         exit(1);
     } else {
-        puts("Şubelere ait en büyük not bilgileri:\n");
+        puts("\nSubelere ait en buyuk not bilgileri:\n");
         while (!feof(DosyaG)) {
-            fscanf(DosyaG, "%d %d %d %s %d",
+            fscanf(DosyaG, "%d %d %d %s %f",
                    &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot);
 
             if (Ogr.OgrSube == 1) {
@@ -106,24 +106,31 @@ void ogrenciEnYuksekNot(struct ogrenci Ogr, const char *dosyaAdi) {
                 if (Ogr.OgrNot > eb4) eb4 = Ogr.OgrNot;
             }
         }
-        printf("Sube 1 En büyük Puan : %d\n", eb1);
-        printf("Sube 2 En büyük Puan : %d\n", eb2);
-        printf("Sube 3 En büyük Puan : %d\n", eb3);
-        printf("Sube 4 En büyük Puan : %d\n", eb4);
+        if(eb1==-1) printf("Sube 1 de ogrenci kaydi bulunamadi!\n");
+        else  printf("Sube 1 En buyuk Puan : %.2f\n", eb1);
+
+        if(eb2==-1) printf("Sube 2 de ogrenci kaydi bulunamadi!\n");
+        else printf("Sube 2 En buyuk Puan : %.2f\n", eb2);
+
+        if(eb3==-1) printf("Sube 3 de ogrenci kaydi bulunamadi!\n");
+        else printf("Sube 3 En buyuk Puan : %.2f\n", eb3);
+
+        if(eb4==-1) printf("Sube 4 de ogrenci kaydi bulunamadi!\n");
+        else printf("Sube 4 En buyuk Puan : %.2f\n", eb4);
     }
     fclose(DosyaG);
 }
 
 void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi) {
-    int ek1 = 101, ek2 = 101, ek3 = 101, ek4 = 101;
+    float ek1 = 101, ek2 = 101, ek3 = 101, ek4 = 101;
     FILE *DosyaG = fopen(dosyaAdi, "r");
     if (DosyaG == NULL) {
         puts("ogrenci.txt dosyasi acilamadi. !\n");
         exit(1);
     } else {
-        puts("Şubelere ait en küçük not bilgileri:\n");
+        puts("\nSubelere ait en kucuk not bilgileri:\n");
         while (!feof(DosyaG)) {
-            fscanf(DosyaG, "%d %d %d %s %d",
+            fscanf(DosyaG, "%d %d %d %s %f",
                    &Ogr.OgrSube, &Ogr.OgrCinsiyet, &Ogr.OgrNo, Ogr.OgrAd, &Ogr.OgrNot);
 
             if (Ogr.OgrSube == 1) {
@@ -136,10 +143,17 @@ void ogrenciEnDusukNot(struct ogrenci Ogr, const char *dosyaAdi) {
                 if (Ogr.OgrNot < ek4) ek4 = Ogr.OgrNot;
             }
         }
-        printf("Sube 1 En küçük Puan : %d\n", ek1);
-        printf("Sube 2 En küçük Puan : %d\n", ek2);
-        printf("Sube 3 En küçük Puan : %d\n", ek3);
-        printf("Sube 4 En küçük Puan : %d\n", ek4);
+        if(ek1==101) printf("Sube 1 de ogrenci kaydi bulunamadi!\n");
+        else  printf("Sube 1 En dusuk Puan : %.2f\n", ek1);
+
+        if(ek2==101) printf("Sube 2 de ogrenci kaydi bulunamadi!\n");
+        else printf("Sube 2 En dusuk Puan : %.2f\n", ek2);
+
+        if(ek3==101) printf("Sube 3 de ogrenci kaydi bulunamadi!\n");
+        else printf("Sube 3 En dusuk Puan : %.2f\n", ek3);
+
+        if(ek4==101) printf("Sube 4 de ogrenci kaydi bulunamadi!\n");
+        else printf("Sube 4 En dusuk Puan : %.2f\n", ek4);
     }
     fclose(DosyaG);
 }
