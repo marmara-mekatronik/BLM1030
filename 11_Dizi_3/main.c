@@ -7,27 +7,22 @@
 int main() {
     char satranc[SATIR][SUTUN];
 
-    for (int i = 0; i < SATIR; ++i) {
-        for (int j = 0; j < SUTUN; ++j) {
-            satranc[i][j] = ' ';
+    printf("-----------------\n");
+    for (int i = 0; i < 8; ++i) {
 
-        }
-    }
-
-    for (int i = 0; i < SATIR; ++i) {
-        for (int j = 0; j < SUTUN; ++j) {
-            if ((i + j) % 2 == 0) {
+        printf("|");
+        for (int j = 0; j < 8; ++j) {
+            if ((i + j) % 2 == 0)
                 satranc[i][j] = '#';
-            }
-        }
-    }
+            else
+                satranc[i][j] = ' ';
 
-    for (int i = 0; i < SATIR; ++i) {
-        for (int j = 0; j < SUTUN; ++j) {
             printf("%c",satranc[i][j]);
+            printf("|");
         }
         printf("\n");
     }
+    printf("-----------------\n");
 
     return 0;
 }
