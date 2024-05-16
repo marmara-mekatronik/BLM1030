@@ -8,22 +8,36 @@ int main() {
         printf("Lütfen notunuzu 0-100 arasında giriniz:");
         scanf("%d",&ogr_not);
         if (ogr_not>=0 && ogr_not <= 100)
-        printf("Basarı Harf notunuz : %c dir", Notu_Harfe_Donustur(ogr_not) );
+            printf("Basarı Harf notunuz : %c dir", Notu_Harfe_Donustur(ogr_not) );
         else
             printf("Girdiğiniz sayı 0-100 arasında bir değer olmali\n ");
     } while (ogr_not<0 || ogr_not > 100);
     return 0;
 }
 
-char Notu_Harfe_Donustur(int ogrenci_notu){
-    if(ogrenci_notu>=0 && ogrenci_notu<50)
-        return 'F';
-    if(ogrenci_notu>=50 && ogrenci_notu<70)
-        return 'D';
-    if(ogrenci_notu>=70 && ogrenci_notu<80)
-        return 'C';
-    if(ogrenci_notu>=80 && ogrenci_notu<90)
-        return 'B';
-    if(ogrenci_notu>=90 && ogrenci_notu<=100)
-        return 'A';
+char Notu_Harfe_Donustur(int ogrenci_notu)
+{
+    char not;
+    switch (ogrenci_notu)
+    {
+        case 100:
+            not = 'A';
+            break;
+        case 90 ... 99:
+            not = 'A';
+            break;
+        case 80 ... 89:
+            not = 'B';
+            break;
+        case 70 ... 79:
+            not = 'C';
+            break;
+        case 50 ... 69:
+            not = 'D';
+            break;
+        default:
+            not = 'F';
+            break;
+    }
+    return not;
 }
