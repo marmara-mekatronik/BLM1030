@@ -1,28 +1,40 @@
 #include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
 
-int main(int argc, char *argv[]) {
-    if (argc < 4) {
-        printf("Lütfen en az üç argüman giriniz: sayı1 işlem sayı2\n");
+int main(int argsayisi, char *argvek[])
+{
+    if (argsayisi != 4) {
+        printf("Kullanım: %s <sayı1> <işlem> <sayı2>\n", argvek[0]);
         return 1;
     }
-    switch (*argv[2]) {
-        case 'x':
-            printf("%.2f", atof(argv[1]) * atof(argv[3]));
-            // \* kullan
-            break;
-        case '/':
-            printf("%.2f", atof(argv[1]) / atof(argv[3]));
-            break;
+
+    int sayi1 = atoi(argvek[1]);
+    int sayi2 = atoi(argvek[3]);
+    char islem = *argvek[2];
+    int sonuc;
+
+    switch (islem) {
         case '+':
-            printf("%.2f", atof(argv[1]) + atof(argv[3]));
+            sonuc = sayi1 + sayi2;
             break;
         case '-':
-            printf("%.2f", atof(argv[1]) - atof(argv[3]));
+            sonuc = sayi1 - sayi2;
+            break;
+        case '*':
+            sonuc = sayi1 * sayi2;
+            break;
+        case '/':
+            if (sayi2 == 0) {
+                printf("Hata: Sıfıra bölme yapılamaz.\n");
+                return 1;
+            }
+            sonuc = sayi1 / sayi2;
             break;
         default:
-            printf("Doğru işlem giriniz: +, -, * veya /\n");
+            printf("Hata: Geçersiz işlem '%c'. Sadece +, -, *, / destekleniyor.\n", islem);
+            return 1;
     }
+
+    printf("Sonuç: %d\n", sonuc);
     return 0;
 }
+
