@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Numaralandırmalar aynı kalıyor
+
 enum Cinsiyet {
     Kadin = 1, Erkek
 };
@@ -10,17 +10,17 @@ enum Sube {
     a1 = 1, b1, c1, d1
 };
 
-// Yapı tanımı aynı kalıyor
+
 struct ogrenci {
     int OgrNo;
     float OgrNot;
-    char OgrAd[20]; // İsimler için alanı biraz genişletelim
+    char OgrAd[20]; 
     enum Cinsiyet OgrCinsiyet;
     enum Sube OgrSube;
 };
 
 
-// Dosyaya öğrenci yazar (Bu fonksiyonun içi aynı kalabilir)
+// Dosyaya öğrenci yazar 
 void ogrenciDosyaYaz(const char *dosyaAdi);
 
 // Dosyadaki öğrencileri sayar
