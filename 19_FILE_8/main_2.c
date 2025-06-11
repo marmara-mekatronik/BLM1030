@@ -19,7 +19,6 @@ struct ogrenci {
     enum Sube OgrSube;
 };
 
-// --- YENİ VE GÜNCELLENMİŞ FONKSİYON PROTOTİPLERİ ---
 
 // Dosyaya öğrenci yazar (Bu fonksiyonun içi aynı kalabilir)
 void ogrenciDosyaYaz(const char *dosyaAdi);
@@ -36,7 +35,6 @@ struct ogrenci* subeBirincileriniBul(struct ogrenci* tumOgrenciler, int ogrenciS
 // Öğrenci bilgilerini ekrana yazdırır
 void ogrenciYazdir(struct ogrenci ogr);
 
-// --- ANA FONKSİYON ---
 
 int main() {
     const char *dosyaAdi = "ogrenci.txt";
