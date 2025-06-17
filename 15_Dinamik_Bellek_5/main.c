@@ -15,10 +15,10 @@ int main() {
     printf("Sutun sayisini giriniz :");
     scanf("%d", &sutunSayisi);
 
-    int **matris = (int **) malloc(satirSayisi * sizeof(int));
+    int **matris = (int **) malloc(satirSayisi * sizeof(int*));
 
     for (int m = 0; m < satirSayisi; ++m) {
-        matris[m] = (int **) malloc(sutunSayisi * sizeof(int));
+        matris[m] = (int *) malloc(sutunSayisi * sizeof(int));
 
     }
 
