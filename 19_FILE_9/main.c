@@ -17,6 +17,25 @@ typedef struct {
     FilmTur tur;
 } SinemaFilmi;
 
+FilmTur Cevir(const char *sEnum) { //Terminalden alınan string'i enum'a çeviren fonskiyon
+    if (strcmp(sEnum, "dram") == 0) return dram;
+    if (strcmp(sEnum, "komedi") == 0) return komedi;
+    if (strcmp(sEnum, "gerilim") == 0) return gerilim;
+    if (strcmp(sEnum, "korku") == 0) return korku;
+    return 0;
+}
+
+const char* eStr(FilmTur tur) { //Ekrana film türlerini yazdırırken sayı yerine metin olarak yazılması için enum'u string'e çeviren fonksiyon
+    switch(tur) {
+    case dram: return "dram";
+    case komedi: return "komedi";
+    case gerilim: return "gerilim";
+    case korku: return "korku";
+    default: return "bilinmiyor";
+    }
+}
+
+
 // main fonksiyonu, komut satırı argümanlarını alacak şekilde güncellendi.
 // argc: Argüman sayısı (programın adı dahil)
 // argv: Argümanların string olarak tutulduğu dizi (bir pointer dizisi)
@@ -35,7 +54,7 @@ int main(int argc, char *argv[]) {
 
     // 2. Film Sayısını ve Dinamik Diziyi Oluşturma
     int elemanSayisi = (argc - 1) / 4;
-    printf("%d adet film bilgisi girildi.\n\n", elemanSayisi);
+    printf("%d adet film için bilgi girildi.\n\n", elemanSayisi);
 
     // SinemaFilmi yapısı için bellekten dinamik olarak yer ayırıyoruz.
     // Bu bir pointer'dır ve 'elemanSayisi' kadar SinemaFilmi yapısı için yer tutar.
@@ -47,13 +66,15 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+
+
     // 3. Komut Satırından Gelen Verileri Diziye Aktarma
     for (int i = 0; i < elemanSayisi; ++i) {
         // argv'deki veriler string olduğu için dönüşüm yapıyoruz.
         // Film adı (string): strcpy ile kopyalanır.
         // argv indeksi: 1 (ilk film adı) + i * 4 (her film 4 argüman kaplar)
         strcpy(filmler[i].ad, argv[1 + i * 4]);
-        
+
         // Yapım yılı (string -> int): atoi (ASCII to Integer) fonksiyonu ile
         filmler[i].yapimYili = atoi(argv[2 + i * 4]);
 
@@ -61,15 +82,16 @@ int main(int argc, char *argv[]) {
         filmler[i].imdb = atof(argv[3 + i * 4]);
 
         // Film türü (string -> enum): atoi ile int'e çevirip FilmTur'e cast ediyoruz.
-        filmler[i].tur = (FilmTur)atoi(argv[4 + i * 4]);
+        filmler[i].tur = Cevir(argv[4 + i * 4]);
+
     }
-    
+
     // 4. Ekrana Yazdırma (Bu kısım orijinal kodla aynı, sadece dizi adı değişti)
     for (int i = 0; i < elemanSayisi; ++i) {
         printf("Film Adi: %s \n",filmler[i].ad);
         printf("Film Yapim Yili:%d\n",filmler[i].yapimYili);
         printf("Film IMDB Puani:%.2f\n",filmler[i].imdb);
-        printf("Film Turu:%d\n",filmler[i].tur);
+        printf("Film Turu:%s\n", eStr(filmler[i].tur));
         printf("____________________________________\n");
     }
 
@@ -96,13 +118,13 @@ int main(int argc, char *argv[]) {
         free(filmler); // Hata durumunda bellegi serbest bırak
         exit(1);
     }
-    
+
     // Dosyadan struct'ları tek tek okuyup ekrana yazdırıyoruz.
     while(fread(&okunanFilm, sizeof(SinemaFilmi), 1, Dosya) == 1) {
         printf("Film Adi: %s \n",okunanFilm.ad);
         printf("Film Yapim Yili:%d\n",okunanFilm.yapimYili);
         printf("Film IMDB Puani:%.2f\n",okunanFilm.imdb);
-        printf("Film Turu:%d\n",okunanFilm.tur);
+        printf("Film Turu:%s\n", eStr(okunanFilm.tur));
         printf("____________________________________\n");
     }
     fclose(Dosya);
