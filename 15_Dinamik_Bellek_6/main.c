@@ -16,7 +16,7 @@ int main() {
     printf("\n_________________\n");
     printf("\"calloc\" sonucu oluşan dizinin elemanları");
     printf("\n_________________\n");
-    diziYazdır(sayi_Dizisi_1,sayi);
+    diziYazdir(sayi_Dizisi_1,sayi);
 
     for (int i = 0; i < sayi ; ++i) {
         sayi_Dizisi_1[i]=i*i;
@@ -33,14 +33,14 @@ int main() {
     printf("\n_________________\n");
     printf("\"malloc\" sonucu oluşan dizinin elemanları");
     printf("\n_________________\n");
-    diziYazdır(sayi_Dizisi_1,sayi);
+    diziYazdir(sayi_Dizisi_1,sayi);
 
     sayi_Dizisi_1= realloc(sayi_Dizisi_1, sizeof(int)*sayi);
     /////////////////////////////////////////////////
     printf("\n_________________\n");
     printf("\"realloc\" sonucu oluşan dizinin elemanları");
     printf("\n_________________\n");
-    diziYazdır(sayi_Dizisi_1,sayi*2);
+    diziYazdir(sayi_Dizisi_1,sayi*2);
 
     free(sayi_Dizisi_1);
     return 0;
