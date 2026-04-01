@@ -10,14 +10,26 @@ Depo temel olarak üç ana eğitim dizinine ayrılmıştır:
 
 ### 1. 📖 [Sunumlar](./Sunumlar)
 Dersin teorik temellerinin anlatıldığı slaytlara ve ders notlarına ait PDF belgeleri:
-- `Hafta_1_Giris.pdf`: Bilgisayar mantığına giriş, temel kavramlar.
-- `Hafta_2_Veri_Tipleri_ve_Degiskenler.pdf`: Bellek, bit-byte mantığı, primitive tipler.
-- `Hafta_3_Temel_ve_Ileri_Duzey_Operatorler.pdf`: Temel aritmetikten bit seviyesi operatörlere kadar işlenen konular.
+
+| Hafta | Dosya | Konu |
+|:-----:|:------|:-----|
+| 1 | `Hafta_1_Giris.pdf` | Bilgisayar mantığına giriş, temel kavramlar |
+| 2 | `Hafta_2_Veri_Tipleri_ve_Degiskenler.pdf` | Bellek, bit-byte mantığı, primitive tipler |
+| 3 | `Hafta_3_Temel_ve_Ileri_Duzey_Operatorler.pdf` | Temel aritmetikten bit seviyesi operatörlere |
+| 4 | `Hafta_4_Kontrol_Yapilari.pdf` | if-else, switch-case, ternary operatör |
+| 5 | `Hafta_5_Donguler.pdf` | for, while, do-while döngüleri, iç içe döngüler |
+| 6 | `Hafta_6_Diziler.pdf` | Tek/çok boyutlu diziler, stringler, string.h |
 
 ### 2. 🧪 [LAB-Ornekler](./LAB-Ornekler)
 Ders anlatımını ve sunumları desteklemek için hazırlanan, teoriğin pratiğine döküldüğü **haftalık ders uygulamaları**dır. Her bir haftanın teorik içeriğinin bire bir C kodundaki karşılıklarını (`Ornek` ve `Uygulama` düzeyinde) kapsar.
-- `Hafta_2_Veri_Tipleri_ve_Degiskenler`
-- `Hafta_3_Operatorler`
+
+| Hafta | Klasör | İçerik |
+|:-----:|:-------|:-------|
+| 2 | `Hafta_2_Veri_Tipleri_ve_Degiskenler/` | sizeof, printf, scanf, daire/küre hesaplamaları (4 örnek) |
+| 3 | `Hafta_3_Operatorler/` | Aritmetik, öncelik, artırma/azaltma, tip dönüşümü, PID kontrol (6 örnek) |
+| 4 | `Hafta_4_Kontrol_Yapilari/` | if-else, switch-case, fall-through, ternary, motor kontrol (6 örnek) |
+| 5 | `Hafta_5_Donguler/` | Desen çizimi, asal sayı, Fibonacci, Taylor serisi, sinyal işleme (20 örnek) |
+| 6 | `Hafta_6_Diziler/` | Hareketli ortalama, sıralama, istatistik, matris çarpımı, histogram (8 örnek) |
 
 ### 3. 🧩 [Ornekler](./Ornekler)
 Dönem boyunca spesifik bir tekniği ya da konuyu öğretmek üzerine kategorize edilmiş daha geniş kod arşividir. Konular aşağıdakilerle sınırlı olmamak üzere oldukça geniş bir algoritma altyapısını yansıtır:
