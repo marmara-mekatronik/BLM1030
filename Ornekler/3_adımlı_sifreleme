@@ -13,10 +13,10 @@ uint16_t gray() { //burada time.h'tan gelen zamanının son 16 bitini alıp gray
 void şifreleme(char *metin, uint8_t key1, uint8_t key2) {
     for (int i = 0; i < strlen(metin); i++) {
         if (i%2==1) {
-            metin[i] = key1 ^ metin[i]; //metnin tek indeksli karakterlerini key1 ile XOR'layarak şifreliyoruz
+            metin[i] = key2 ^ metin[i]; //metnin tek indeksli karakterlerini key2 ile XOR'layarak şifreliyoruz
         }
         else {
-            metin[i] = key2 ^ metin[i]; //metnin çift indeksli karakterlerini key2 ile XOR'layarak şifreliyoruz
+            metin[i] = key1 ^ metin[i]; //metnin çift indeksli karakterlerini key1 ile XOR'layarak şifreliyoruz
         }
     }
 
