@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <time.h>
+#include <string.h>
+#include <stdint.h>
+#define boyut 101
+uint16_t gray() { //burada time.h'tan gelen zamanının son 16 bitini alıp gray code'a çeviriyoruz
+    time_t time_key=time(NULL);
+    uint16_t binary_time= (uint16_t)(time_key & 0xFFFF);
+    printf("Zaman anahtarınız (Hex): 0x%04X\n", binary_time );
+    uint16_t gray_key = binary_time ^ (binary_time >> 1);
+    return gray_key;
+}
+void şifreleme(char *metin, uint8_t key1, uint8_t key2, int metin_uzunluk) {
+    for (int i = 0; i < metin_uzunluk; i++) {
+        if (i%2==1) {
+            metin[i] = key1 ^ metin[i]; //metnin tek indeksli karakterlerini key1 ile XOR'layarak şifreliyoruz
+        }
+        else {
+            metin[i] = key2 ^ metin[i]; //metnin çift indeksli karakterlerini key2 ile XOR'layarak şifreliyoruz
+        }
+    }
+
+}
+void sezar(char *metin, int metin_uzunluk) {//sezar şifrelemesinin kendimce bir yorumu: her karakterin 3.bitini sonraki karakterin 3. bitiyle yer değiştiriyorum
+    for (int i = 0; i < metin_uzunluk-1 ; i++) {
+        uint8_t bit_mevcut = (metin[i] >> 2) & 1;
+        uint8_t bit_sonraki = (metin[i+1] >> 2) & 1;
+        if (bit_mevcut != bit_sonraki) {
+            metin[i] ^= (1 << 2);
+            metin[i+1] ^= (1 << 2);
+        }
+    }
+}
+int main() {
+    printf("3 adımlı şifreleme programına hoş geldiniz!\n");
+    char Mesaj[boyut];
+    printf("Şifrelemek istediğiniz metni giriniz(100 karakter):");
+    fgets(Mesaj, boyut, stdin);
+    Mesaj[strcspn(Mesaj, "\n")] = 0;
+    int metin_uzunluk=strlen(Mesaj);
+    uint16_t gray_key = gray();
+    printf("Gray code anahtarınız (Binary): ");
+    for (int i = 15; i >= 0; i--) {
+        printf("%d", (gray_key >> i) & 1);
+        if (i % 4 == 0) printf(" ");
+    }
+    printf(" (Onluk değeri: %u)\n", gray_key);
+    uint8_t key1 = (uint8_t)(gray_key >> 8);
+    uint8_t key2 = (uint8_t)(gray_key & 0xFF);
+    şifreleme(Mesaj, key1, key2, metin_uzunluk);
+    sezar(Mesaj, metin_uzunluk);
+    printf("Sifrelenmis mesajınız (HEX): ");
+    for(int i = 0; i < metin_uzunluk; i++) {
+        printf("%02X ", (unsigned char)Mesaj[i]);
+    }
+    return 0;
+}
