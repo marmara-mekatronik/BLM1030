@@ -1,0 +1,44 @@
+#include <stdio.h>
+void tamponu_temizle() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+}
+void aç_gözlü(int tutar, int verilen_para) {
+    if (verilen_para < tutar) {
+        printf("Eksik ödeme yaptınız.\n");
+    }
+    else if (verilen_para == tutar) {
+        printf("Tam ödeme yaptınız, para üstünüz 0 TL'dir.\n");
+    }
+    else{
+        int para_üstü = verilen_para - tutar;
+        printf("Para üstünüz: %d \n",para_üstü);
+        int paralar[7]={200,100,50,20,10,5,1};
+        for (int i = 0; i < 7; i++) {
+            int para_sayısı=para_üstü/paralar[i];
+            if (para_sayısı>0){
+                printf("%d TL'den %d adet\n", paralar[i], para_sayısı);
+                para_üstü %= paralar[i];
+
+            }
+        }
+    }
+}
+int main() {
+    int tutar, para_üstü, verilen_para, para_sayısı;
+    printf("Alışveriş tutarını giriniz: ");
+    if (scanf("%d", &tutar) != 1 || tutar <= 0) {
+        printf("Geçersiz tutar girdiniz.\n");
+        return 1;
+    }
+    tamponu_temizle();
+    printf("Verilen parayı giriniz: ");
+    if (scanf("%d", &verilen_para) != 1 || verilen_para <= 0) {
+        printf("Geçersiz para girdiniz.\n");
+        return 1;
+    }
+    tamponu_temizle();
+    aç_gözlü(tutar, verilen_para);
+    return 0;
+}
