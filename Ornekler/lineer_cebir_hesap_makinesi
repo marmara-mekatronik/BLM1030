@@ -1,0 +1,341 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+void tamponu_temizle();
+void determinant();
+void toplam();
+void fark();
+void çarpım();
+void transpoz();
+void ters();
+int **matrisi_al();
+int **matrisi_al2();
+int determinant_hesap(int **matris, int boyut);
+void skaler();
+void vektörel();
+void vektör_açısı();
+double *vektör_al();
+
+int satır, sütun, satır2, sütun2;
+
+int main() {
+    int secim;
+    printf("Matris İşlemleri Programına Hoşgeldiniz!\n");
+    printf("----------------------------------------- \n");
+    printf("Yapmak istediğiniz işlemi seçiniz:\n");
+    printf("1. Toplama\n2. Çıkarma\n3. Çarpma\n4. Determinant\n5. Transpoz\n6. Matrisin Tersi\n7. Vektörler Arası Açı\n8. Skaler Çarpım\n9. Vektörel Çarpım\n ");
+
+    if (scanf("%d", &secim) != 1) {
+        printf("Geçersiz Giriş.\n");
+        return 1;
+    }
+    tamponu_temizle();
+
+    switch (secim) {
+        case 1: toplam();break;
+        case 2: fark();break;
+        case 3: çarpım(); break;
+        case 4: determinant();break;
+        case 5: transpoz(); break;
+        case 6: ters(); break;
+        case 7: vektör_açısı();  break;
+        case 8: skaler(); break;
+        case 9: vektörel();  break;
+        default: printf("Geçersiz Seçim!\n"); break;
+    }
+
+    return 0;
+}
+
+
+void tamponu_temizle() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+int **matrisi_al() {
+    printf("Matrisinizin satır sayısını giriniz: ");
+    if (scanf("%d", &satır) != 1 || satır <= 0) return NULL;
+    tamponu_temizle();
+
+    printf("Matrisinizin sütun sayısını giriniz: ");
+    if (scanf("%d", &sütun) != 1 || sütun <= 0) return NULL;
+    tamponu_temizle();
+
+    int **matris = (int **)malloc(satır * sizeof(int *));
+    for (int i = 0; i < satır; i++) {
+        matris[i] = (int *)malloc(sütun * sizeof(int));
+    }
+
+    for (int i = 0; i < satır; i++) {
+        for (int j = 0; j < sütun; j++) {
+            printf("Matrisin %d. satir %d. sütun elemanini giriniz: ", i + 1, j + 1);
+            scanf("%d", &matris[i][j]);
+        }
+    }
+    printf("\n--- Girilen Matris ---\n");
+    for (int i = 0; i < satır; i++) {
+        for (int j = 0; j < sütun; j++) {
+            printf("%d\t", matris[i][j]);
+        }
+        printf("\n");
+    }
+    return matris;
+}
+
+int **matrisi_al2() {
+    printf("İkinci matrisin satır sayısını giriniz: ");
+    if (scanf("%d", &satır2) != 1 || satır2 <= 0) return NULL;
+    tamponu_temizle();
+
+    printf("İkinci matrisin sütun sayısını giriniz: ");
+    if (scanf("%d", &sütun2) != 1 || sütun2 <= 0) return NULL;
+    tamponu_temizle();
+
+    int **matris = (int **)malloc(satır2 * sizeof(int *));
+    for (int i = 0; i < satır2; i++) {
+        matris[i] = (int *)malloc(sütun2 * sizeof(int));
+    }
+
+    for (int i = 0; i < satır2; i++) {
+        for (int j = 0; j < sütun2; j++) {
+            printf("Matrisin %d. satir %d. sütun elemanini giriniz: ", i + 1, j + 1);
+            scanf("%d", &matris[i][j]);
+        }
+    }
+    printf("\n--- Girilen Matris ---\n");
+    for (int i = 0; i < satır2; i++) {
+        for (int j = 0; j < sütun2; j++) {
+            printf("%d\t", matris[i][j]);
+        }
+        printf("\n");
+    }
+    return matris;
+}
+
+void toplam() {
+    int **m1 = matrisi_al();
+    int **m2 = matrisi_al2();
+    if (m1 == NULL || m2 == NULL || satır != satır2 || sütun != sütun2) {
+        printf("Boyutlar uyumsuz veya hata oluştu.\n");
+    } else {
+        printf("Toplama işlemi gerçekleştiriliyor...\n");
+        for (int i = 0; i < satır; i++) {
+            for (int j = 0; j < sütun; j++) {
+                m1[i][j] = m1[i][j] + m2[i][j];
+            }
+        }
+        printf("\nToplama Sonucu:\n");
+        for (int i = 0; i < satır; i++) {
+            for (int j = 0; j < sütun; j++) printf("%d ", m1[i][j]);
+            printf("\n");
+        }
+    }
+    if (m1 != NULL) {
+        for (int i = 0; i < satır; i++) free(m1[i]);
+        free(m1);
+    }
+    if (m2 != NULL) {
+        for (int i = 0; i < satır2; i++) free(m2[i]);
+        free(m2);
+    }
+}
+
+void fark() {
+    int **m1 = matrisi_al();
+    int **m2 = matrisi_al2();
+    if (m1 == NULL || m2 == NULL || satır != satır2 || sütun != sütun2) {
+        printf("Boyutlar uyumsuz.");
+    } else {
+        printf("\nÇıkarma Sonucu:\n");
+        for (int i = 0; i < satır; i++) {
+            for (int j = 0; j < sütun; j++) printf("%d ", m1[i][j] - m2[i][j]);
+            printf("\n");
+        }
+    }
+    if (m1 != NULL) {
+        for (int i = 0; i < satır; i++) free(m1[i]);
+        free(m1);
+    }
+    if (m2 != NULL) {
+        for (int i = 0; i < satır2; i++) free(m2[i]);
+        free(m2);
+    }
+}
+
+void çarpım() {
+    int **m1 = matrisi_al();
+    int **m2 = matrisi_al2();
+    if (m1 == NULL || m2 == NULL || sütun != satır2) {
+        printf("Hata: Matris boyutları çarpım için uygun değil.\n");
+        return;
+    }
+
+    int **sonuc = (int **)malloc(satır * sizeof(int *));
+    for (int i = 0; i < satır; i++) sonuc[i] = (int *)malloc(sütun2 * sizeof(int));
+
+    for (int i = 0; i < satır; i++) {
+        for (int j = 0; j < sütun2; j++) {
+            sonuc[i][j] = 0;
+            for (int k = 0; k < sütun; k++) {
+                sonuc[i][j] += m1[i][k] * m2[k][j];
+            }
+        }
+    }
+
+    printf("\nÇarpım Sonucu:\n");
+    for (int i = 0; i < satır; i++) {
+        for (int j = 0; j < sütun2; j++) printf("%d ", sonuc[i][j]);
+        printf("\n");
+    }
+
+    for (int i = 0; i < satır; i++) free(sonuc[i]);
+    free(sonuc);
+    for (int i = 0; i < satır; i++) free(m1[i]);
+    free(m1);
+
+    for (int i = 0; i < satır2; i++) free(m2[i]);
+    free(m2);
+}
+
+void determinant() {
+    int **m1 = matrisi_al();
+    if (m1 == NULL || satır != sütun) {
+        printf("Hata: Determinant hesaplamak için kare matris gereklidir.\n");
+        return;
+    }
+    else {
+        printf("\nDeterminant Sonucu: %d\n", determinant_hesap(m1, satır));
+    }
+    for (int i = 0; i < satır; i++) free(m1[i]);
+    free(m1);
+}
+int determinant_hesap(int **matris, int boyut) {
+    if (boyut == 1)
+        return matris[0][0];
+    if (boyut == 2)
+        return matris[0][0] * matris[1][1] - matris[0][1] * matris[1][0];
+
+    int det = 0, katsayı = 1;
+
+    for (int i = 0; i < boyut; i++) {
+        int **minor = (int **)malloc((boyut - 1) * sizeof(int *));
+        for (int j = 0; j < boyut - 1; j++) {
+            minor[j] = (int *)malloc((boyut - 1) * sizeof(int));
+        }
+        for (int j = 1; j < boyut; j++) {
+            int alt_sütun = 0;
+            for (int k = 0; k < boyut; k++) {
+                if (k == i) continue;
+                minor[j - 1][alt_sütun++] = matris[j][k];
+            }
+        }
+        det += katsayı * matris[0][i] * determinant_hesap(minor, boyut - 1);
+        katsayı = -katsayı;
+        for (int k = 0; k < boyut - 1; k++) free(minor[k]);
+        free(minor);
+    }
+    return det;
+}
+void transpoz() {
+        int **m = matrisi_al();
+        if (m == NULL) return;
+
+        printf("\nMatrisin Transpozu:\n");
+        for (int j = 0; j < sütun; j++) {
+            for (int i = 0; i < satır; i++) {
+                printf("%d ", m[i][j]);
+            }
+            printf("\n");
+        }
+        for (int i = 0; i < satır; i++) free(m[i]);
+        free(m);
+}
+
+void ters() { printf("Ters matris işlemini henüz kodlayamadım :)\n"); }
+void vektör_açısı() {
+    double *v1 = vektör_al();
+    double *v2 = vektör_al();
+    if (v1 == NULL || v2 == NULL) {
+        printf("Hata: Vektörler alınamadı!\n");
+        return;
+    }else {
+        double skaler = v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+        double uzunluk_v1 = sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
+        double uzunluk_v2 = sqrt(v2[0] * v2[0] + v2[1] * v2[1] + v2[2] * v2[2]);
+
+        if (uzunluk_v1 == 0 || uzunluk_v2 == 0) {
+            printf("Hata: Uzunluğu sıfır olan bir vektör girdiniz.\n");
+            free(v1);
+            free(v2);
+            return;
+        }
+
+        double cos_theta = skaler / (uzunluk_v1 * uzunluk_v2);
+        if (cos_theta > 1) cos_theta = 1.00;
+        if (cos_theta < -1) cos_theta = -1.00;
+
+        double radyal_AÇI = acos(cos_theta);
+        double angle_deg = radyal_AÇI * (180.0 / M_PI);
+
+        printf("\n1. Vektör: [%.2f, %.2f, %.2f]\n", v1[0], v1[1], v1[2]);
+        printf("2. Vektör: [%.2f, %.2f, %.2f]\n", v2[0], v2[1], v2[2]);
+        printf("\nVektörler Arası Açı: %.2f derece\n", angle_deg);
+    }
+    free(v1);
+    free(v2);
+}
+void skaler() {
+    double *v1 = vektör_al();
+    double *v2 = vektör_al();
+    if (v1 == NULL || v2 == NULL) {
+        printf("Hata: Vektörler alınamadı.\n");
+        return;
+    }else {
+        double skaler = v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+        printf("\n1. Vektör: [%.2f, %.2f, %.2f]\n", v1[0], v1[1], v1[2]);
+        printf("2. Vektör: [%.2f, %.2f, %.2f]\n", v2[0], v2[1], v2[2]);
+        printf("\nSkaler Çarpım Sonucu: %.2f\n", skaler);
+    }
+    free(v1);
+    free(v2);
+}
+void vektörel() {
+    double *v1 = vektör_al();
+    double *v2 = vektör_al();
+    if (v1 == NULL || v2 == NULL) {
+        printf("Hata: Vektörler alınamadı.\n");
+        return;
+    }else {
+        double vektörel_x = v1[1] * v2[2] - v1[2] * v2[1];
+        double vektörel_y = v1[2] * v2[0] - v1[0] * v2[2];
+        double vektörel_z = v1[0] * v2[1] - v1[1] * v2[0];
+
+        printf("\n1. Vektör: [%.2f, %.2f, %.2f]\n", v1[0], v1[1], v1[2]);
+        printf("2. Vektör: [%.2f, %.2f, %.2f]\n", v2[0], v2[1], v2[2]);
+        printf("\nVektörel Çarpım Sonucu: [%.2f, %.2f, %.2f]\n", vektörel_x, vektörel_y, vektörel_z);
+    }
+    free(v1);
+    free(v2);
+}
+
+double *vektör_al() {
+    double *vektör = (double *)malloc(3 * sizeof(double));
+    if (vektör == NULL) {
+        printf("Hata!\n");
+        return NULL;
+    }
+    else {
+        printf("Vektörün 3 bileşenini sırayla giriniz (x, y, z): ");
+        for (int i = 0; i < 3; i++) {
+            if (scanf("%lf", &vektör[i]) != 1) {
+                tamponu_temizle();
+                printf("Geçersiz giriş!\n");
+            }
+            else { printf("\n"); }
+            }
+        }
+        return vektör;
+}
