@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 void tamponu_temizle();
@@ -104,9 +105,9 @@ int **matrisi_al2() {
             scanf("%d", &matris[i][j]);
         }
     }
-    printf("\n--- Girilen Matris Onayi ---\n");
-    for (int i = 0; i < satır; i++) {
-        for (int j = 0; j < sütun; j++) {
+    printf("\n--- Girilen Matris ---\n");
+    for (int i = 0; i < satır2; i++) {
+        for (int j = 0; j < sütun2; j++) {
             printf("%d\t", matris[i][j]);
         }
         printf("\n");
@@ -146,7 +147,7 @@ void fark() {
     int **m1 = matrisi_al();
     int **m2 = matrisi_al2();
     if (m1 == NULL || m2 == NULL || satır != satır2 || sütun != sütun2) {
-        printf("Boyutlar uyumsuz!\n");
+        printf("Boyutlar uyumsuz.");
     } else {
         printf("\nÇıkarma Sonucu:\n");
         for (int i = 0; i < satır; i++) {
@@ -330,9 +331,11 @@ double *vektör_al() {
         printf("Vektörün 3 bileşenini sırayla giriniz (x, y, z): ");
         for (int i = 0; i < 3; i++) {
             if (scanf("%lf", &vektör[i]) != 1) {
+                tamponu_temizle();
                 printf("Geçersiz giriş!\n");
             }
             else { printf("\n"); }
             }
         }
         return vektör;
+}
