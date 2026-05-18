@@ -29,6 +29,3 @@ Bu dizin, **BLM1030 - Bilgisayar Programlama** dersinin teorik temellerini barı
 2. **Laboratuvar Kodlarını Deneyin:** Sunumda geçen teorik ve uygulamalı örneklerin tamamını [LAB-Ornekler](../LAB-Ornekler/) klasöründe derleyerek çalıştırın ve üzerinde değişiklikler yapın.
 3. **Sorular ve Hata Analizi:** Kodlardaki padding, endianness ve bit işlemleri gibi kritik bellek kavramlarını anlamak için sunumdaki görsel şemaları referans alın.
 
----
-👨‍🏫 **Dr. Öğr. Üyesi Hüseyin YÜCE**  
-Marmara Üniversitesi — Mekatronik Mühendisliği Bölümü  
